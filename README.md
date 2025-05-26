@@ -25,6 +25,17 @@ yarn add -D esbuild-deploy
 # or
 pnpm add -D esbuild-deploy
 ```
+## CLI Options
+
+`esbuild-deploy` supports the following command-line parameters:
+
+```bash
+Options:
+  -h, --help    Display help for command
+  -d, --debug   Output extra debugging from esbuild
+  -o, --outdir  Output directory (default: "./deploy")
+```
+
 ## Package Configuration
 
 ### ESM Packages

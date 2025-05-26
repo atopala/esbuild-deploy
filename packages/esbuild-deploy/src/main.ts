@@ -5,7 +5,6 @@ import deepmerge from "deepmerge";
 import { build, type BuildOptions } from "esbuild";
 import { nodeExternalsPlugin } from "esbuild-node-externals";
 import { getBuildOptionsList } from "./get-build-options-list.js";
-import { DEPLOY_DIR_NAME } from "./config.js";
 import { buildPackageJson } from "./build-package-json.js";
 import { x } from "./x.js";
 
@@ -29,8 +28,8 @@ function bundle(buildOptions?: BuildOptions) {
    return build(options);
 }
 
-export async function main(args?: { debug?: boolean }) {
-   const { debug } = args ?? {};
+export async function main(args: { debug: boolean; outdir: string }) {
+   const { debug, outdir } = args;
    const logLevel = x(() => {
       if (debug) {
          return "debug";
@@ -39,7 +38,7 @@ export async function main(args?: { debug?: boolean }) {
       }
    });
 
-   const { buildConfig, packageInfo } = await getBuildOptionsList({ logLevel });
+   const { buildConfig, packageInfo } = await getBuildOptionsList({ logLevel, outdir });
 
    for (const buildOptions of buildConfig) {
       // console.debug("Bundle Setting", buildOptions);
@@ -48,5 +47,5 @@ export async function main(args?: { debug?: boolean }) {
    }
 
    const packageJson = buildPackageJson(packageInfo);
-   await fs.writeFile(path.resolve(DEPLOY_DIR_NAME, "package.json"), JSON.stringify(packageJson, null, " "));
+   await fs.writeFile(path.resolve(outdir, "package.json"), JSON.stringify(packageJson, null, " "));
 }

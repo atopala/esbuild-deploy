@@ -4,7 +4,6 @@ import { getBuildOptionsEsm } from "./get-build-options-esm.js";
 import { getBuildOptionsCjs } from "./get-build-options-cjs.js";
 import path from "node:path";
 import { readPackageBuildOptions } from "./read-package-build-options.js";
-import { DEPLOY_DIR_NAME } from "./config.js";
 
 export async function getBuildOptionsList(
    options: Partial<BuildOptions>,
@@ -20,7 +19,6 @@ export async function getBuildOptionsList(
          return {
             buildConfig: [
                ...getBuildOptionsEsm({
-                  outdir: path.resolve(DEPLOY_DIR_NAME, path.dirname(packageInfo.module)),
                   entryPoints: [path.resolve(packageInfo.module)],
                   ...options,
                }),
@@ -32,7 +30,6 @@ export async function getBuildOptionsList(
          return {
             buildConfig: [
                ...getBuildOptionsCjs({
-                  outdir: path.resolve(DEPLOY_DIR_NAME, path.dirname(packageInfo.main)),
                   entryPoints: [path.resolve(packageInfo.main)],
                   ...options,
                }),

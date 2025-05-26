@@ -2,6 +2,7 @@
 
 import { program } from "commander";
 import { main } from "./main.js";
+import path from "node:path";
 
 program
    .name("esbuild-deploy")
@@ -10,13 +11,14 @@ program
    .addHelpText("after", "Full documentation and examples: https://github.com/atopala/esbuild-deploy")
    .option("-h, --help", "display help for command", false)
    .option("-d, --debug", "output extra debugging from esbuild", false)
+   .option("-o, --outdir", "output directory. default is: ./deploy ", path.resolve("./deploy"))
    .parse();
 
-const opts = program.opts<{ debug: boolean; help: boolean }>();
-const { debug, help } = opts;
+const opts = program.opts<{ debug: boolean; help: boolean; outdir: string }>();
+const { debug, help, outdir } = opts;
 
 if (help) {
    program.help();
 } else {
-   await main({ debug });
+   await main({ debug, outdir });
 }
