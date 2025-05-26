@@ -19,7 +19,8 @@
     "build:1-tsc": "tsc -b",
     "build": "run-s 'build:*'",
     "prepack:1-copy-readme": "copyfiles -f \"../../README.md\" .",
-    "prepack": "run-s 'build' 'prepack:*'"
+    "prepack": "run-s 'build' 'prepack:*'",
+    "publish": "pnpm publish --access public"
   },
   "keywords": [],
   "author": "",
