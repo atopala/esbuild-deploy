@@ -1,6 +1,6 @@
 {
   "name": "esbuild-deploy",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0",
   "description": "Deploy your Node.js apps with esbuild - zero configuration, no node_modules needed. Smart module detection from package.json (ESM/CJS).",
   "publishConfig": {
     "access": "public"
