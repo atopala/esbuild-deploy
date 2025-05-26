@@ -13,5 +13,5 @@ yarn-error.log*
 
 db
 dist
-deploy
+deploy*
 *.tsbuildinfo
