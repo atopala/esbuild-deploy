@@ -9,7 +9,7 @@
     "dev": "run-s 'build' 'dev:*'",
     "dev:1-start": "vite-node --watch src/index.ts | pino-pretty",
     "deploy": "pnpm run-s 'build' 'deploy:*'",
-    "deploy:1-esbuild": "esbuild-deploy"
+    "deploy:1-esbuild": "esbuild-deploy -o './deploy2'"
   },
   "keywords": [],
   "author": "",

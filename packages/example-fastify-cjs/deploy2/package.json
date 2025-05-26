@@ -1,0 +1,13 @@
+{
+ "name": "example-fastify-cjs",
+ "version": "1.0.0",
+ "description": "",
+ "type": "commonjs",
+ "main": "./dist/index.js",
+ "scripts": {
+  "start": "node ./dist/index.js"
+ },
+ "keywords": [],
+ "author": "",
+ "license": "ISC"
+}

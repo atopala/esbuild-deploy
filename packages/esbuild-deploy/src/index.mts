@@ -11,7 +11,7 @@ program
    .addHelpText("after", "Full documentation and examples: https://github.com/atopala/esbuild-deploy")
    .option("-h, --help", "display help for command", false)
    .option("-d, --debug", "output extra debugging from esbuild", false)
-   .option("-o, --outdir", "output directory. default is: ./deploy ", path.resolve("./deploy"))
+   .option("-o, --outdir <outdir>", "output directory. default is: ./deploy ", path.resolve("./deploy"))
    .parse();
 
 const opts = program.opts<{ debug: boolean; help: boolean; outdir: string }>();
