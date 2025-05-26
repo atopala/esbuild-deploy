@@ -4,6 +4,7 @@
   "author": "Adrian Topala",
   "description": "Deploy your Node.js apps with esbuild - zero configuration, no node_modules needed. Smart module detection from package.json (ESM/CJS).",
   "private": true,
+  "repository": "https://github.com/atopala/esbuild-deploy",
   "workspaces": [
     "packages/*"
   ],

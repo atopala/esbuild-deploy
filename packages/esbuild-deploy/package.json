@@ -2,8 +2,13 @@
   "name": "esbuild-deploy",
   "version": "1.0.0",
   "description": "Deploy your Node.js apps with esbuild - zero configuration, no node_modules needed. Smart module detection from package.json (ESM/CJS).",
+  "repository": "https://github.com/atopala/esbuild-deploy",
   "publishConfig": {
     "access": "public"
+  },
+  "homepage": "https://github.com/atopala/esbuild-deploy#readme",
+  "bugs": {
+    "url": "https://github.com/atopala/esbuild-deploy/issues"
   },
   "type": "module",
   "module": "./dist/index.mjs",
