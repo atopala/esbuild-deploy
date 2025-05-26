@@ -1,0 +1,6 @@
+packages:
+  - "packages/**"
+  - "!**/tests/**"
+  - "!**/dist/**"
+  - "!**/build/**"
+  - "!**/deploy/**"

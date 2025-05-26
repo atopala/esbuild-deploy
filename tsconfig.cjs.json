@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "moduleDetection": "force",
+    "moduleResolution": "node"
+  }
+}

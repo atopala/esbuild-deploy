@@ -1,0 +1,40 @@
+{
+  "name": "esbuild-deploy",
+  "version": "1.0.0-beta.1",
+  "description": "Deploy your Node.js apps with esbuild - zero configuration, no node_modules needed. Smart module detection from package.json (ESM/CJS).",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": "./dist/index.mjs",
+  "engines": {
+    "node": ">=20.19.2",
+    "pnpm": ">=9.15.0"
+  },
+  "bin": {
+    "esbuild-deploy": "./dist/index.mjs"
+  },
+  "scripts": {
+    "build:1-tsc": "tsc -b",
+    "build": "run-s 'build:*'",
+    "prepack:1-copy-readme": "copyfiles -f \"../../README.md\" .",
+    "prepack": "run-s 'build' 'prepack:*'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sinclair/typebox": "^0.32.14",
+    "commander": "^12.0.0",
+    "deepmerge": "^4.3.1",
+    "esbuild": "^0.20.0",
+    "esbuild-node-externals": "^1.13.0",
+    "esbuild-plugin-copy": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "copyfiles": "^2.4.1"
+  }
+}

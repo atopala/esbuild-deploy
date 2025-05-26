@@ -1,0 +1,11 @@
+[
+  {
+    "entryPoints": [
+      "./node_modules/better-sqlite3/build/Release/better_sqlite3.node"
+    ],
+    "outdir": "./deploy/Release/",
+    "loader": {
+      ".node": "copy"
+    }
+  }
+]
