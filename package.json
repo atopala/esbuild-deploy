@@ -7,6 +7,10 @@
   "workspaces": [
     "packages/*"
   ],
+  "engines": {
+    "node": ">=20.19.2",
+    "pnpm": ">=9.15.0"
+  },
   "scripts": {
     "clean:build": "pnpm -r --parallel exec rm -rf dist deploy tsconfig.tsbuildinfo",
     "clean:1-dependencies-r": "pnpm -r --parallel exec rm -rf node_modules",
