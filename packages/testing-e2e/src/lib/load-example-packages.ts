@@ -1,6 +1,6 @@
 import path from "node:path";
 import { __DIRNAME__ } from "../config.js";
-import type { PackageInfo } from "../types/index.js";
+import type { PackageInfo } from "@types";
 import fs from "node:fs/promises";
 import { glob } from "glob";
 import assert from "node:assert";

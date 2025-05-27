@@ -1,5 +1,5 @@
 import path from "node:path";
-import type { DeployResult, PackageInfo } from "../types/index.js";
+import type { DeployResult, PackageInfo } from "@types";
 import { execSync } from "node:child_process";
 
 export async function executePackageBuild(pkg: PackageInfo): Promise<DeployResult> {
