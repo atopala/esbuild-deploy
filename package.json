@@ -15,8 +15,8 @@
   "scripts": {
     "clean:build": "pnpm -r --parallel exec rimraf dist deploy tsconfig.tsbuildinfo",
     "clean:1-dependencies-r": "pnpm -r --parallel exec rimraf node_modules",
-    "clean:2-dependencies-w": "pnpm exec rimraf node_modules",
-    "clean:3-lock-file": "pnpm exec rimraf pnpm-lock.yaml",
+    "clean:2-lock-file": "pnpm exec rimraf pnpm-lock.yaml",
+    "clean:3-dependencies-w": "pnpm exec rimraf node_modules",
     "clean-all": "run-s 'clean:*'"
   },
   "devDependencies": {

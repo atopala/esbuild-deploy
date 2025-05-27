@@ -2,7 +2,7 @@ import type { BuildOptions } from "esbuild";
 import fs from "node:fs/promises";
 import { ok } from "node:assert";
 
-export async function readPackageBuildOptions(filePath: string): Promise<BuildOptions[]> {
+export async function readPackageBuildConfig(filePath: string): Promise<BuildOptions[]> {
    ok(filePath, "filePath is required");
 
    try {
