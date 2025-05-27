@@ -5,15 +5,11 @@
     "rootDir": "./src",
     "composite": false,
     "baseUrl": ".",
-    "paths": {
-      "@types": ["./src/types/index.ts"]
-    }
   },
   "include": [
     "src/**/*"
   ],
   "ts-node": {
-    "files": true,
     "esm": true
   }
 }

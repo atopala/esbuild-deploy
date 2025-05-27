@@ -1,9 +1,9 @@
 import path from "node:path";
 import { __DIRNAME__ } from "../config.js";
-import type { PackageInfo } from "@types";
 import fs from "node:fs/promises";
 import { glob } from "glob";
 import assert from "node:assert";
+import { PackageInfo } from "../types/index.js";
 
 export async function loadExamplePackages() {
    // Get the workspace root directory (assuming we're in packages/testing-e2e)

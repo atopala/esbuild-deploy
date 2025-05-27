@@ -1,5 +1,8 @@
 FROM --platform=$BUILDPLATFORM node:20-bullseye AS builder
 
+RUN apt-get update
+RUN apt-get install tree
+
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
@@ -19,6 +22,8 @@ ENV PATH="$PNPM_HOME:$PATH"
 
 COPY . /src
 WORKDIR "/src"
+
+RUN tree .
 
 # pnpm install
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
