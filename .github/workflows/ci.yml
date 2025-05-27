@@ -1,60 +1,38 @@
-name: CI
+name: CI (Docker-based)
+
 on:
   push:
-    branches:
-      - '**'  # This will match all branches
+    branches: ['**']
   pull_request:
-    branches:
-      - '**'  # This will match all branches
+    branches: ['**']
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: 🧾 Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20.19.2'
+      - name: 🐳 Build Docker image
+        run: DOCKER_BUILDKIT=1 docker build -t esbuild-deploy-ci --progress=plain --platform linux/amd64  -t esbuild-node-deploy:latest -f ./Dockerfile .
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 9.15.0  # Specify your pnpm version here
+      - name: 📁 Prepare test result directory
+        run: mkdir -p test-results
 
-      - name: Setup pnpm cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
+      - name: 🚀 Run tests in Docker container
+        run: |
+          docker run --rm \
+            -v $PWD/test-results:/src/packages/testing-e2e/test-results
+            esbuild-deploy-ci
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build project
-        run: pnpm -r run build
-
-      # installing esbuild-deploy as workspace dependency
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      # Optional: Add testing step if you have tests
-      - name: Run tests
-        run: pnpm -r run test
-
-      - name: Upload test results
+      - name: 📤 Upload test results
         uses: actions/upload-artifact@v4
         with:
           name: cucumber-results
-          path: ./packages/testing-e2e/test-results/cucumber-report.xml
+          path: ./test-results/cucumber-report.xml
 
-      - name: Publish test results to GitHub
+      - name: 📊 Publish test results to GitHub UI
         uses: mikepenz/action-junit-report@v4
         with:
-          report_paths: './packages/testing-e2e/test-results/cucumber-report.xml'
+          report_paths: './test-results/cucumber-report.xml'
