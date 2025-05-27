@@ -8,6 +8,7 @@
   "workspaces": [
     "packages/*"
   ],
+  "packageManager": "pnpm@9.15.0",
   "engines": {
     "node": ">=20.19.2",
     "pnpm": ">=9.15.0"
@@ -17,7 +18,8 @@
     "clean:1-lock-file": "pnpm exec rimraf pnpm-lock.yaml",
     "clean:2-dependencies-r": "pnpm -r --parallel exec rimraf node_modules",
     "clean:3-dependencies-w": "pnpm exec rimraf node_modules",
-    "clean-all": "run-s 'clean:*'"
+    "clean-all": "run-s 'clean:*'",
+    "docker:build": "DOCKER_BUILDKIT=1 docker build --progress=plain --no-cache --platform linux/amd64  -t esbuild-node-deploy:latest ."
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

@@ -23,7 +23,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 9.15.9  # Specify your pnpm version here
+          version: 9.15.0  # Specify your pnpm version here
 
       - name: Setup pnpm cache
         uses: actions/cache@v3
