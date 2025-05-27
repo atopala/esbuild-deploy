@@ -18,7 +18,7 @@ export async function executePackageDeploy(pkg: PackageInfo): Promise<DeployResu
 
       return {
          packageName: pkg.name,
-         deployPath: path.join(pkg.path, "deploy"),
+         deployPath: path.resolve(pkg.path, "deploy"),
          output,
       };
    } catch (error) {
