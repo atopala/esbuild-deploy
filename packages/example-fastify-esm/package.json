@@ -1,5 +1,5 @@
 {
-  "name": "example-fastify-esm",
+  "name": "@esbuild-deploy/example-fastify-esm",
   "version": "1.0.0",
   "description": "",
   "type": "module",

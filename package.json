@@ -19,7 +19,8 @@
     "clean-all": "run-s 'clean:*'",
     "build": "pnpm -r run build",
     "build:1": "pnpm --filter='./packages/esbuild-deploy' run build",
-    "build:2": "pnpm -r --filter='!./packages/esbuild-deploy' run build"
+    "build:2": "pnpm -r --filter='!./packages/esbuild-deploy' run build",
+    "test": "pnpm -r run test"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
