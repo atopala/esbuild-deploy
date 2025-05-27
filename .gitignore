@@ -10,8 +10,11 @@ yarn-error.log*
 
 .vscode/*
 .idea
+.run
 
 db
 dist
 deploy*
 *.tsbuildinfo
+
+test-results

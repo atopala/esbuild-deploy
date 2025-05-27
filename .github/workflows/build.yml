@@ -47,7 +47,7 @@ jobs:
       - name: Generate HTML Report
         if: always()
         run: |
-          cd packages/e2e-tests
+          cd packages/testing-e2e
           pnpm cucumber-html-reporter  # Assuming you have this package installed
 
       - name: Upload HTML Report

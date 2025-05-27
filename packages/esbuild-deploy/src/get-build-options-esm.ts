@@ -20,7 +20,6 @@ export function getBuildOptionsEsm(options: Partial<BuildOptions>): BuildOptions
       deepmerge(
          {
             allowOverwrite: true,
-            outdir: path.resolve("./deploy"),
             format: "esm",
             sourcemap: true,
             platform: "node",

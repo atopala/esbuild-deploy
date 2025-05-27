@@ -27,7 +27,8 @@ Then("Each deploy directory should contain bundled files", function (this: TestW
          throw new Error(`No bundled files found for ${result.packageName}`);
       }
 
-      console.log(`Bundled files found for ${result.packageName}: ${files.join("\n")}`);
+      this.log(`Bundled files found for ${result.packageName}:\ndir:${deployPath}\n${files.join("\n")}`);
+      this.attach(JSON.stringify(files, null, 2), { fileName: deployPath, mediaType: "application/json" });
    }
 });
 
@@ -53,16 +54,15 @@ Then("Each bundled file should match its module type", function (this: TestWorld
       }
 
       const targetFile = path.basename(entryPoint);
-      const targetFilePath = path.join(deployPath, targetFile);
+      const targetFilePath = path.resolve(deployPath, entryPoint);
       const targetExists = fs.existsSync(targetFilePath);
+      this.log(`Checking for ${pkg.name}: ${targetFilePath}.\ndeploy: ${deployPath}\nentryPoint: ${targetFile}`);
 
       if (!targetExists) {
-         throw new Error(
-            `Output not found for ${pkg.name}. ` +
-               `Expected: ${targetFile} from ${isESM ? "module" : "main"}: ${entryPoint}`,
-         );
+         throw new Error(`Output not found for ${pkg.name}. ` + `Expected: ${targetFilePath}`);
       }
 
-      console.log(`✓ ${pkg.name}: Found ${isESM ? "ESM" : "CJS"} output ${targetFilePath}`);
+      this.log(`✓ ${pkg.name}: Found ${isESM ? "ESM" : "CJS"} output ${targetFilePath}`);
+      this.attach(targetFilePath, { fileName: targetFile, mediaType: "application/json" });
    }
 });
