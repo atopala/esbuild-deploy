@@ -4,12 +4,14 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "composite": false,
-    "baseUrl": ".",
   },
   "include": [
     "src/**/*"
   ],
   "ts-node": {
+    "files": true,
+    "experimentalResolver": true,
     "esm": true
+
   }
 }

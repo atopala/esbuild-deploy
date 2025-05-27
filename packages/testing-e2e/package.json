@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "e2e scenario testing with cucumber.js",
   "type": "module",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "exports": "./dist/index.mjs",
   "engines": {
     "node": ">=20.19.2"
   },
@@ -20,20 +17,12 @@
   "license": "ISC",
   "dependencies": {
     "@cucumber/cucumber": "^11.3.0",
-    "@sinclair/typebox": "^0.32.14",
-    "commander": "^12.0.0",
-    "deepmerge": "^4.3.1",
-    "esbuild": "^0.20.0",
-    "esbuild-node-externals": "^1.13.0",
-    "esbuild-plugin-copy": "^2.1.1",
     "glob": "^11.0.2"
   },
   "devDependencies": {
     "@cucumber/pretty-formatter": "^1.0.1",
-    "@types/node": "^20",
     "copyfiles": "^2.4.1",
     "cucumber-html-reporter": "latest",
-    "ts-node": "^10.9.2",
-    "vite-tsconfig-paths": "^5.1.4"
+    "ts-node": "^10.9.2"
   }
 }
