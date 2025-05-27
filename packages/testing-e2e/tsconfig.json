@@ -13,6 +13,7 @@
     "src/**/*"
   ],
   "ts-node": {
-    "files": true
+    "files": true,
+    "esm": true
   }
 }
