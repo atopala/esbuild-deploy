@@ -1,6 +1,6 @@
+import path from "node:path";
 import type { DeployResult, PackageInfo } from "../types/index.js";
 import { execSync } from "node:child_process";
-import path from "node:path";
 
 export async function executePackageBuild(pkg: PackageInfo): Promise<DeployResult> {
    // Store original working directory
