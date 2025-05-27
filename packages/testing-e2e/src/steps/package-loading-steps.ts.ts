@@ -2,7 +2,7 @@ import { Given } from "@cucumber/cucumber";
 import { TestWorld } from "../test-world.js";
 import path from "node:path";
 import { glob } from "glob";
-import { PackageInfo } from "../types/index.js";
+import type { PackageInfo } from "../types/index.js";
 import { __DIRNAME__ } from "../config.js";
 import fs from "node:fs";
 
