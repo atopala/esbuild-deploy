@@ -18,12 +18,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '20.19.2'
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 9  # Specify your pnpm version here
+          version: 9.15.9  # Specify your pnpm version here
 
       - name: Setup pnpm cache
         uses: actions/cache@v3
@@ -49,14 +49,12 @@ jobs:
         run: pnpm -r test
 
       - name: Upload test results
-        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: cucumber-results
           path: ./packages/testing-e2e/test-results/cucumber-report.xml
 
       - name: Publish test results to GitHub
-        if: always()
         uses: mikepenz/action-junit-report@v4
         with:
           report_paths: './packages/testing-e2e/test-results/cucumber-report.xml'
