@@ -44,15 +44,15 @@ jobs:
       - name: Run tests
         run: pnpm test
 
-      - name: Generate HTML Report
+      - name: Upload test results
         if: always()
-        run: |
-          cd packages/testing-e2e
-          pnpm cucumber-html-reporter  # Assuming you have this package installed
-
-      - name: Upload HTML Report
-        if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: cucumber-html-report
-          path: packages/e2e-tests/test-results/cucumber-report.html
+          name: cucumber-results
+          path: test-results/cucumber-report.xml
+
+      - name: Publish test results to GitHub
+        if: always()
+        uses: mikepenz/action-junit-report@v4
+        with:
+          report_paths: 'test-results/cucumber-report.xml'

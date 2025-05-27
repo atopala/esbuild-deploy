@@ -1,6 +1,11 @@
 export default function () {
    const common = {
-      format: ["progress-bar", "html:test-results/cucumber-report.html", "json:test-results/cucumber-report.json"],
+      format: [
+         "progress-bar",
+         "html:test-results/cucumber-report.html",
+         "json:test-results/cucumber-report.json",
+         "message:test-results/cucumber.ndjson",
+      ],
       paths: ["./features/*.feature"],
       loader: ["ts-node/esm"],
       import: ["./src/**/*.ts"],
