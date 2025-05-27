@@ -38,7 +38,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build project
-        run: pnpm -r build
+        run: pnpm --filter='./packages/esbuild-deploy' run build
 
       # installing esbuild-deploy as workspace dependency
       - name: Install dependencies
@@ -46,7 +46,7 @@ jobs:
 
       # Optional: Add testing step if you have tests
       - name: Run tests
-        run: pnpm -r test
+        run: pnpm -r run test
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
