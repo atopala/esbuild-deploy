@@ -13,7 +13,7 @@
     "build:1-tsc": "tsc -b",
     "build": "run-s 'build:*'",
     "test": "run-s 'test:*'",
-    "test:1-cucumber": "cucumber-js",
+    "test:1-cucumber": "cucumber-js"
   },
   "keywords": [],
   "author": "",
