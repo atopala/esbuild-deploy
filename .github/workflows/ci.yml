@@ -38,7 +38,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build project
-        run: pnpm --filter='./packages/esbuild-deploy' run build
+        run: pnpm -r run build
 
       # installing esbuild-deploy as workspace dependency
       - name: Install dependencies
