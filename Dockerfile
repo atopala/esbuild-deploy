@@ -29,7 +29,7 @@ RUN tree .
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
 # building esbuild-deploy
-RUN pnpm --filter='./packages/esbuild-deploy' run build
+RUN pnpm -r run build
 
 # installing esbuild-deploy as workspace dependency
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
