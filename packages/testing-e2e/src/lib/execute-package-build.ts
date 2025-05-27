@@ -20,6 +20,7 @@ export async function executePackageBuild(pkg: PackageInfo): Promise<DeployResul
          output,
       };
    } catch (error) {
+      console.error(error);
       throw new Error(`Error building ${pkg.name}: ${error instanceof Error ? error.message : String(error)}`);
    } finally {
       // Ensure we restore working directory even if build fails

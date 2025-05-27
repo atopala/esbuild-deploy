@@ -16,11 +16,7 @@
     "clean:build": "pnpm -r --parallel exec rm -rf dist deploy tsconfig.tsbuildinfo",
     "clean:1-dependencies-r": "pnpm -r --parallel exec rm -rf node_modules",
     "clean:2-dependencies-w": "pnpm exec rm -rf node_modules",
-    "clean-all": "run-s 'clean:*'",
-    "build": "pnpm -r run build",
-    "build:1": "pnpm --filter='./packages/esbuild-deploy' run build",
-    "build:2": "pnpm -r --filter='!./packages/esbuild-deploy' run build",
-    "test": "pnpm -r run test"
+    "clean-all": "run-s 'clean:*'"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

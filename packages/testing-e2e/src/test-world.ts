@@ -1,5 +1,5 @@
 import { IWorldOptions, setWorldConstructor, World } from "@cucumber/cucumber";
-import { DeployResult, PackageInfo } from "./types/index.js";
+import { type DeployResult, type PackageInfo } from "./types/index.js";
 
 /**
  * Cucumber test world.
