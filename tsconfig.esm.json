@@ -1,13 +1,11 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "Node16",
+    "target": "es2022",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "lib": [
       "esnext"
     ],
-    "moduleResolution": "Node16",
-    "moduleDetection": "force",
-    "noUncheckedIndexedAccess": true
   }
 }

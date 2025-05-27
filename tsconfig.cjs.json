@@ -3,7 +3,7 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
-    "moduleDetection": "force",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "esModuleInterop": true
   }
 }
