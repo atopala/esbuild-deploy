@@ -43,5 +43,5 @@ jobs:
       - name: Publish Test Results
         uses: mikepenz/action-junit-report@v4
         with:
-          name: Test Results
+          check_name:  'Cucumber Tests'
           report_paths: './test-results/cucumber-junit.xml'
