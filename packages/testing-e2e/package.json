@@ -10,7 +10,8 @@
     "build:1-tsc": "tsc -b",
     "build": "run-s 'build:*'",
     "test": "run-s 'test:*'",
-    "test:1-cucumber": "cucumber-js"
+    "test:1-cucumber": "cucumber-js",
+    "test:2-publish": "env-cmd --silent -f ../../.env cucumber-js publish"
   },
   "keywords": [],
   "author": "",
@@ -23,7 +24,6 @@
     "@cucumber/pretty-formatter": "^1.0.1",
     "copyfiles": "^2.4.1",
     "cucumber-html-reporter": "latest",
-    "cucumber-junit": "^1.7.1",
     "ts-node": "^10.9.2"
   }
 }

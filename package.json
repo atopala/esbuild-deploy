@@ -19,10 +19,10 @@
     "clean:2-dependencies-r": "pnpm -r --parallel exec rimraf node_modules",
     "clean:3-dependencies-w": "pnpm exec rimraf node_modules",
     "clean-all": "run-s 'clean:*'",
-    "docker:build": "DOCKER_BUILDKIT=1 docker build -t esbuild-deploy-ci --progress=plain --platform linux/amd64  -t esbuild-node-deploy:latest .",
-    "docker:run": "docker run --rm -v $PWD/test-results:/src/packages/testing-e2e/test-results esbuild-deploy-ci"
+    "docker:build": "DOCKER_BUILDKIT=1 docker build --progress=plain -t esbuild-deploy-ci:latest .",
+    "docker:run": "docker run --env-file .env --rm -v \"$PWD/test-results:/src/packages/testing-e2e/test-results\" esbuild-deploy-ci:latest"
   },
-  "devDependencies": {
+    "devDependencies": {
     "@eslint/js": "^9.17.0",
     "@tsconfig/node20": "^20.1.5",
     "esbuild-deploy": "workspace:^",

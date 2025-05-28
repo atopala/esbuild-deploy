@@ -16,10 +16,6 @@ ARG BUILDPLATFORM
 
 RUN echo "I am running on $BUILDPLATFORM, building for $TARGETPLATFORM" > /log
 
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-#ENV NODE_TLS_REJECT_UNAUTHORIZED=0
-
 COPY . /src
 WORKDIR "/src"
 
@@ -31,7 +27,15 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 # building esbuild-deploy
 RUN pnpm -r run build
 
-# installing esbuild-deploy as workspace dependency
+# pnpm install esbuild-deploy
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
-CMD ["pnpm", "--filter", "./packages/testing-e2e", "run", "test"]
+# Create test results directory and set permissions
+RUN mkdir -p /src/packages/testing-e2e/test-results && \
+    chmod 777 /src/packages/testing-e2e/test-results
+
+# Set working directory to e2e package
+WORKDIR "/src/packages/testing-e2e"
+
+# Use exec form of CMD with explicit shell to ensure proper signal handling
+CMD ["/bin/sh", "-c", "pnpm run test"]
