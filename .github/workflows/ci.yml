@@ -39,20 +39,3 @@ jobs:
           name: Cucumber Tests
           path: ./test-results/cucumber-junit.xml
           reporter: java-junit
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-#      - name: Publish Cucumber Report
-#        uses: dorny/test-reporter@v1
-#        with:
-#          name: Cucumber Tests
-#          path: ./test-results/cucumber-junit.json
-#          reporter: junit
-#          fail-on-error: false
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: 📊 Publish test results to GitHub UI
-        uses: mikepenz/action-junit-report@v4
-        with:
-          report_paths: './test-results/**'

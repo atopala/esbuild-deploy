@@ -18,3 +18,4 @@ deploy*
 *.tsbuildinfo
 
 test-results
+.env
