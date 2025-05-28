@@ -27,9 +27,16 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cucumber-results
-          path: ./test-results/**
+          path: ./test-results/cucumber-results.xml
 
-      - name: 📊 Publish test results to GitHub UI
-        uses: mikepenz/action-junit-report@v4
+      - name: Publish Cucumber Report
+        uses: dorny/test-reporter@v1
         with:
-          report_paths: './test-results/**'
+          name: Cucumber Tests
+          path: ./test-results/cucumber-results.xml
+          reporter: java-junit
+
+#      - name: 📊 Publish test results to GitHub UI
+#        uses: mikepenz/action-junit-report@v4
+#        with:
+#          report_paths: './test-results/**'
