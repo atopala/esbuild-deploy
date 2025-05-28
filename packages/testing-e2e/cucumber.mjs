@@ -5,7 +5,7 @@ export default function () {
          "summary",
          "html:test-results/cucumber-report.html",
          // "json:test-results/cucumber-report.json",
-         "message:test-results/cucumber-messages.json",
+         // "message:test-results/cucumber-messages.json",
          "junit:test-results/cucumber-junit.xml",
       ],
       formatOptions: {

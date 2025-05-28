@@ -33,9 +33,17 @@ jobs:
           name: cucumber-results
           path: ./test-results/cucumber-report.html
 
-      - name: Publish Cucumber Report
-        uses: dorny/test-reporter@v1
+#      - name: Publish Cucumber Report
+#        uses: dorny/test-reporter@v1
+#        with:
+#          name: Cucumber Tests
+#          path: ./test-results/cucumber-junit.xml
+#          reporter: java-junit
+
+      - name: Publish Test Results
+        uses: mikepenz/action-junit-report@v4
         with:
-          name: Cucumber Tests
-          path: ./test-results/cucumber-junit.xml
-          reporter: java-junit
+          report_paths: 'packages/testing-e2e/test-results/cucumber-junit.xml'
+          detailed_summary: true
+          include_passed: true
+          check_name: 'Test Results'
