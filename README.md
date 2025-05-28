@@ -2,6 +2,8 @@
 
 A zero-config deployment bundler that leverages esbuild to create optimized distribution packages for Node.js applications.
 
+![Cucumber Report](https://messages.cucumber.io/api/report-collections/951b9672-9385-4055-8456-73cc1b85e719/badge)
+
 ## Overview
 
 `esbuild-deploy` simplifies the deployment process by creating optimized bundles of your Node.js applications, eliminating the need to deploy the entire `node_modules` directory.
