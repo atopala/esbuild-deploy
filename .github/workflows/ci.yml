@@ -24,10 +24,15 @@ jobs:
       - name: 📁 Prepare test result directory
         run: mkdir -p test-results
 
+      - name: Prepare .env file
+        run: |
+          echo "CUCUMBER_PUBLISH_TOKEN=${{ secrets.CUCUMBER_PUBLISH_TOKEN }}" >> .env
+
       - name: 🚀 Run tests in Docker container
-        run: docker run --rm -v "$PWD/test-results:/src/packages/testing-e2e/test-results" esbuild-deploy-ci:latest
-        env:
-          CUCUMBER_PUBLISH_TOKEN: ${{ secrets.CUCUMBER_PUBLISH_TOKEN }}
+        run: docker run --env-file .env --rm -v "$PWD/test-results:/src/packages/testing-e2e/test-results" esbuild-deploy-ci:latest
+
+      - name: 📝 Remove local .env
+        run: rm -rf .env
 
       - name: 📤 Upload test results
         uses: actions/upload-artifact@v4
@@ -38,4 +43,5 @@ jobs:
       - name: Publish Test Results
         uses: mikepenz/action-junit-report@v4
         with:
+          name: Test Results
           report_paths: './test-results/cucumber-junit.xml'
