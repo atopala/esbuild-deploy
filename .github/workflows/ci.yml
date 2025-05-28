@@ -25,6 +25,6 @@ jobs:
         run: mkdir -p test-results
 
       - name: 🚀 Run tests in Docker container
-        run: docker run --rm -v $PWD/test-results:/src/packages/testing-e2e/test-results esbuild-deploy-ci
+        run: docker run --rm -v "$PWD/test-results:/src/packages/testing-e2e/test-results" esbuild-deploy-ci:latest
         env:
           CUCUMBER_PUBLISH_TOKEN: ${{ secrets.CUCUMBER_PUBLISH_TOKEN }}
