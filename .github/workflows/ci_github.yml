@@ -49,9 +49,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # Optional: Add testing step if you have tests
       - name: Run tests
-        run: pnpm -r run test
+        run: pnpm -r run test:1-cucumber
+
+      - name: Run tests
+        run: pnpm -r run test:2-publish >> $GITHUB_STEP_SUMMARY
         env:
           CUCUMBER_PUBLISH_TOKEN: ${{ secrets.CUCUMBER_PUBLISH_TOKEN }}
 
