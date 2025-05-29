@@ -22,9 +22,10 @@
     "docker:build": "DOCKER_BUILDKIT=1 docker build --progress=plain -t esbuild-deploy-ci:latest .",
     "docker:run": "docker run --env-file .env --rm -v \"$PWD/test-results:/src/packages/testing-e2e/test-results\" esbuild-deploy-ci:latest"
   },
-    "devDependencies": {
+  "devDependencies": {
     "@eslint/js": "^9.17.0",
     "@tsconfig/node20": "^20.1.5",
+    "env-cmd": "^10.1.0",
     "esbuild-deploy": "workspace:^",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
