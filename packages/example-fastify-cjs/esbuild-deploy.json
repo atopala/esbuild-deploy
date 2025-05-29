@@ -3,7 +3,7 @@
     "entryPoints": [
       "./node_modules/better-sqlite3/build/Release/better_sqlite3.node"
     ],
-    "outdir": "./deploy/Release/",
+    "outdir": "./deploy2/Release/",
     "loader": {
       ".node": "copy"
     }

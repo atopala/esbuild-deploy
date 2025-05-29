@@ -2,19 +2,16 @@
   "extends": "../../tsconfig.esm.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "resolveJsonModule": true,
-    "rootDir": "src",
+    "rootDir": "./src",
     "composite": false,
-    "esModuleInterop": true
   },
   "include": [
     "src/**/*"
   ],
-  "exclude": [
-    "**/__tests__/*.ts",
-    "**/*.tests.ts"
-  ],
   "ts-node": {
-    "files": true
+    "files": true,
+    "experimentalResolver": true,
+    "esm": true
+
   }
 }

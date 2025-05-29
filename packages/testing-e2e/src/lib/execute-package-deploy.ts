@@ -1,6 +1,6 @@
 import path from "node:path";
-import type { DeployResult, PackageInfo } from "../types/index.js";
 import { execSync } from "node:child_process";
+import { DeployResult, PackageInfo } from "../types/index.js";
 
 export async function executePackageDeploy(pkg: PackageInfo): Promise<DeployResult> {
    // Store original working directory
@@ -18,7 +18,7 @@ export async function executePackageDeploy(pkg: PackageInfo): Promise<DeployResu
 
       return {
          packageName: pkg.name,
-         deployPath: path.join(pkg.path, "deploy"),
+         deployPath: path.resolve(pkg.path, "deploy"),
          output,
       };
    } catch (error) {

@@ -2,9 +2,9 @@ import { Given } from "@cucumber/cucumber";
 import { TestWorld } from "../test-world.js";
 import path from "node:path";
 import { glob } from "glob";
-import type { PackageInfo } from "../types/index.js";
 import { __DIRNAME__ } from "../config.js";
 import fs from "node:fs";
+import { PackageInfo } from "../types/index.js";
 
 Given("Loading example packages from workspace", async function (this: TestWorld) {
    // Get the workspace root directory (assuming we're in packages/testing-e2e)
