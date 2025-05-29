@@ -1,0 +1,64 @@
+name: CI (GitHub)
+on:
+  push:
+    branches:
+      - '**'  # This will match all branches
+  pull_request:
+    branches:
+      - '**'  # This will match all branches
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: 'package.json'  # This will read from engines.node
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          run_install: false
+          package_json_file: 'package.json'  # This will read from packageManager
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build project
+        run: pnpm --filter='./packages/esbuild-deploy' run build
+
+      # installing esbuild-deploy as workspace dependency
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Optional: Add testing step if you have tests
+      - name: Run tests
+        run: pnpm -r run test
+        env:
+          CUCUMBER_PUBLISH_TOKEN: ${{ secrets.CUCUMBER_PUBLISH_TOKEN }}
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-results
+          path: ./packages/testing-e2e/test-results/cucumber-report.html
+
+      - name: Publish test results to GitHub
+        uses: mikepenz/action-junit-report@v4
+        with:
+          check_name:  'Cucumber Tests'
+          report_paths: './packages/testing-e2e/test-results/cucumber-junit.xml'
