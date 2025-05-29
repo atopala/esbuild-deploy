@@ -22,4 +22,4 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/actions/build-and-test.yml
+      - uses: ./.github/actions/build-and-test
