@@ -1,6 +1,14 @@
 name: Build and Test (Composite)
 description: Common steps for build, test, and reporting in CI and release flows
 
+inputs:
+  CUCUMBER_PUBLISH_TOKEN:
+    description: Cucumber.io publish token
+    required: true
+  GITHUB_TOKEN:
+    description: GitHub token
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -55,7 +63,7 @@ runs:
           echo "❌ Cucumber report URL not found" >> $GITHUB_STEP_SUMMARY
         fi
       env:
-        CUCUMBER_PUBLISH_TOKEN: ${{ secrets.CUCUMBER_PUBLISH_TOKEN }}
+        CUCUMBER_PUBLISH_TOKEN: ${{ inputs.CUCUMBER_PUBLISH_TOKEN }}
 
     - name: 💬 Comment report URL on PR
       shell: bash
@@ -63,7 +71,7 @@ runs:
       run: |
         gh pr comment ${{ github.event.pull_request.number }} --body "🧪 Cucumber Report: [${{ env.REPORT_URL }}](${{ env.REPORT_URL }})"
       env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
     - name: Upload test results
       uses: actions/upload-artifact@v4

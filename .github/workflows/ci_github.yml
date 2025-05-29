@@ -27,3 +27,6 @@ jobs:
 
       - name: Build and test
         uses: ./.github/actions/build-and-test
+        with:
+          CUCUMBER_PUBLISH_TOKEN: ${{ secrets.CUCUMBER_PUBLISH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
