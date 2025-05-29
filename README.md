@@ -2,7 +2,7 @@
 
 A zero-config deployment bundler that leverages esbuild to create optimized distribution packages for Node.js applications.
 
-[![CI Status](https://github.com/atopala/esbuild-deploy/actions/workflows/ci.yml/badge.svg)](https://github.com/atopala/esbuild-deploy/actions/workflows/ci.yml)
+[![CI](https://github.com/atopala/esbuild-deploy/actions/workflows/ci_github.yml/badge.svg)](https://github.com/atopala/esbuild-deploy/actions/workflows/ci_github.yml)
 
 [![Cucumber Report](https://messages.cucumber.io/api/report-collections/951b9672-9385-4055-8456-73cc1b85e719/badge)](https://reports.cucumber.io/report-collections/951b9672-9385-4055-8456-73cc1b85e719)
 
