@@ -17,9 +17,16 @@ concurrency:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: ./.github/actions/build-and-test.yml
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build and test
+        uses: ./.github/actions/build-and-test
+        with:
+          CUCUMBER_PUBLISH_TOKEN: ${{ secrets.CUCUMBER_PUBLISH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Upload build output
         uses: actions/upload-artifact@v4
         with:
@@ -33,6 +40,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Download build output
+        uses: actions/download-artifact@v4
+        with:
+          name: esbuild-deploy-dist
+          path: ./packages/esbuild-deploy/dist/
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -44,17 +57,17 @@ jobs:
           run_install: false
           package_json_file: 'package.json'
 
-      - name: Download build output
-        uses: actions/download-artifact@v4
-        with:
-          name: esbuild-deploy-dist
-          path: ./packages/esbuild-deploy/dist/
-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Publish to NPM
         working-directory: packages/esbuild-deploy
-        run: pnpm publish --dry-run --no-git-checks --access public
+        run: pnpm publish --dry-run --no-git-checks --access --report-summary public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+
+      - name: Upload publish summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: pnpm-publish-summary.json
+          path: ./packages/esbuild-deploy/pnpm-publish-summary.json

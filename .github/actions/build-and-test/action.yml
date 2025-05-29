@@ -76,7 +76,7 @@ runs:
     - name: Upload test results
       uses: actions/upload-artifact@v4
       with:
-        name: cucumber-results
+        name: cucumber-report.html
         path: ./packages/testing-e2e/test-results/cucumber-report.html
 
     - name: Publish test results to GitHub
