@@ -29,16 +29,20 @@ runs:
 
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
+      shell: bash
 
     - name: Build project
       run: pnpm --filter='./packages/esbuild-deploy' run build
+      shell: bash
 
     # installing esbuild-deploy as workspace dependency
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
+      shell: bash
 
     - name: Run tests
       id: tests
+      shell: bash
       run: |
         OUTPUT=$(pnpm -r run test)
         echo "$OUTPUT"
@@ -54,6 +58,7 @@ runs:
         CUCUMBER_PUBLISH_TOKEN: ${{ secrets.CUCUMBER_PUBLISH_TOKEN }}
 
     - name: 💬 Comment report URL on PR
+      shell: bash
       if: ${{ github.event_name == 'pull_request' && env.REPORT_URL != '' }}
       run: |
         gh pr comment ${{ github.event.pull_request.number }} --body "🧪 Cucumber Report: [${{ env.REPORT_URL }}](${{ env.REPORT_URL }})"
