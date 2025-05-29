@@ -61,7 +61,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Publish to NPM
-        working-directory: packages/esbuild-deploy
+        working-directory: ./packages/esbuild-deploy
         run: pnpm publish --no-git-checks --access --report-summary public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
