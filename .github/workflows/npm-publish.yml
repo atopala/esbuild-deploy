@@ -64,6 +64,13 @@ jobs:
         #don't write actual token into .npmrc
         run: echo '//registry.npmjs.org/:_authToken=${NPM_ACCESS_TOKEN}' >> .npmrc
 
+      - name: Set package.json version to match release tag
+        working-directory: packages/esbuild-deploy
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "Setting version to $VERSION"
+          pnpm pkg set version="$VERSION"
+
       - name: Publish to NPM
         working-directory: ./packages/esbuild-deploy
         run: pnpm publish --access public --no-git-checks --report-summary
