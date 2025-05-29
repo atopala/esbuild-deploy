@@ -62,7 +62,7 @@ jobs:
 
       - name: Publish to NPM
         working-directory: ./packages/esbuild-deploy
-        run: pnpm publish --no-git-checks --access --report-summary public
+        run: pnpm publish --report-summary --no-git-checks --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
 
