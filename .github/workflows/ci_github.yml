@@ -56,10 +56,12 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run tests
+        id: tests
         run: |
           OUTPUT=$(pnpm -r run test)
           echo "$OUTPUT"
           REPORT_URL=$(echo "$OUTPUT" | grep -oE 'https://reports.cucumber.io/reports/[a-zA-Z0-9-]+')
+          echo "REPORT_URL=$REPORT_URL" >> $GITHUB_ENV
           
           if [ -n "$REPORT_URL" ]; then
             echo "🧪 Cucumber Report: [$REPORT_URL]($REPORT_URL)" >> $GITHUB_STEP_SUMMARY
@@ -70,9 +72,9 @@ jobs:
           CUCUMBER_PUBLISH_TOKEN: ${{ secrets.CUCUMBER_PUBLISH_TOKEN }}
 
       - name: 💬 Comment report URL on PR
-        if: ${{ github.event_name == 'pull_request' }}
+        if: ${{ github.event_name == 'pull_request' && env.REPORT_URL != '' }}
         run: |
-          gh pr comment ${{ github.event.pull_request.number }} --body "🧪 Cucumber Report: [$REPORT_URL]($REPORT_URL)"
+          gh pr comment ${{ github.event.pull_request.number }} --body "🧪 Cucumber Report: [${{ env.REPORT_URL }}](${{ env.REPORT_URL }})"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
