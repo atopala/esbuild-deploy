@@ -7,6 +7,10 @@ on:
     branches:
       - '**'  # This will match all branches
 
+permissions:
+  contents: read
+  checks: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
