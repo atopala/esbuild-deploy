@@ -10,6 +10,8 @@ on:
 permissions:
   contents: read
   checks: write
+  pull-requests: write
+  issues: write
 
 jobs:
   build:
@@ -56,7 +58,7 @@ jobs:
           REPORT_URL=$(echo "$OUTPUT" | grep -oE 'https://reports.cucumber.io/reports/[a-zA-Z0-9-]+')
           
           if [ -n "$REPORT_URL" ]; then
-            echo "🧪 [Cucumber Report: $REPORT_URL]($REPORT_URL)" >> $GITHUB_STEP_SUMMARY
+            echo "🧪 Cucumber Report: [$REPORT_URL]($REPORT_URL)" >> $GITHUB_STEP_SUMMARY
           else
             echo "❌ Cucumber report URL not found" >> $GITHUB_STEP_SUMMARY
           fi
