@@ -1,4 +1,4 @@
-name: CI (Docker-based)
+name: CI
 
 on:
   push:
