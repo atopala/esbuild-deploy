@@ -50,10 +50,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run tests
-        run: pnpm -r run test:1-cucumber
-
-      - name: Run tests
-        run: pnpm -r run test:2-publish >> $GITHUB_STEP_SUMMARY
+        run: pnpm -r run test >> $GITHUB_STEP_SUMMARY
         env:
           CUCUMBER_PUBLISH_TOKEN: ${{ secrets.CUCUMBER_PUBLISH_TOKEN }}
 

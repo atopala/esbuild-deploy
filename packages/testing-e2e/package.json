@@ -9,9 +9,7 @@
   "scripts": {
     "build:1-tsc": "tsc -b",
     "build": "run-s 'build:*'",
-    "test": "run-s 'test:*'",
-    "test:1-cucumber": "cucumber-js",
-    "test:2-publish": "env-cmd --silent -f ../../.env cucumber-js publish"
+    "test": "env-cmd --silent -f ../../.env cucumber-js --publish"
   },
   "keywords": [],
   "author": "",
