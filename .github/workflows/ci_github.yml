@@ -68,7 +68,7 @@ jobs:
       - name: 💬 Comment report URL on PR
         if: ${{ github.event_name == 'pull_request' }}
         run: |
-          gh pr comment ${{ github.event.pull_request.number }} --body "🧪 [Cucumber Report: $REPORT_URL]($REPORT_URL)"
+          gh pr comment ${{ github.event.pull_request.number }} --body "🧪 Cucumber Report: [$REPORT_URL]($REPORT_URL)"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
