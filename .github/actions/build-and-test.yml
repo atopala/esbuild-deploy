@@ -1,0 +1,73 @@
+name: Build and Test (Composite)
+description: Common steps for build, test, and reporting in CI and release flows
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version-file: 'package.json'  # This will read from engines.node
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        run_install: false
+        package_json_file: 'package.json'  # This will read from packageManager
+
+    - name: Setup pnpm cache
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.pnpm-store
+        key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-
+
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+
+    - name: Build project
+      run: pnpm --filter='./packages/esbuild-deploy' run build
+
+    # installing esbuild-deploy as workspace dependency
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+
+    - name: Run tests
+      id: tests
+      run: |
+        OUTPUT=$(pnpm -r run test)
+        echo "$OUTPUT"
+        REPORT_URL=$(echo "$OUTPUT" | grep -oE 'https://reports.cucumber.io/reports/[a-zA-Z0-9-]+')
+        echo "REPORT_URL=$REPORT_URL" >> $GITHUB_ENV
+        
+        if [ -n "$REPORT_URL" ]; then
+          echo "🧪 Cucumber Report: [$REPORT_URL]($REPORT_URL)" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "❌ Cucumber report URL not found" >> $GITHUB_STEP_SUMMARY
+        fi
+      env:
+        CUCUMBER_PUBLISH_TOKEN: ${{ secrets.CUCUMBER_PUBLISH_TOKEN }}
+
+    - name: 💬 Comment report URL on PR
+      if: ${{ github.event_name == 'pull_request' && env.REPORT_URL != '' }}
+      run: |
+        gh pr comment ${{ github.event.pull_request.number }} --body "🧪 Cucumber Report: [${{ env.REPORT_URL }}](${{ env.REPORT_URL }})"
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      with:
+        name: cucumber-results
+        path: ./packages/testing-e2e/test-results/cucumber-report.html
+
+    - name: Publish test results to GitHub
+      uses: mikepenz/action-junit-report@v4
+      with:
+        check_name: 'Cucumber Tests'
+        report_paths: './packages/testing-e2e/test-results/cucumber-junit.xml'
